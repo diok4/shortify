@@ -1,6 +1,6 @@
 "use client";
-import { ChatInput } from "@/widgets/chat/chat-input";
-import { ChatOutput } from "@/widgets/chat/chat-output";
+import { ChatInput } from "@/src/widgets/chat/chat-input";
+import { ChatOutput } from "@/src/widgets/chat/chat-output";
 
 export default function HomePage() {
   return (

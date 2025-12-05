@@ -3,7 +3,7 @@ import { RxExit } from "react-icons/rx";
 import { FaCircleUser } from "react-icons/fa6";
 import Link from "next/link";
 import { MdChat } from "react-icons/md";
-import { NavLink } from "@/shared/navlink";
+import { NavLink } from "@/src/widgets/shared/navlink";
 import { IoIosSettings } from "react-icons/io";
 
 export const NavBar = () => {

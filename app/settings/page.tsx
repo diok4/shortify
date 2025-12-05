@@ -1,7 +1,9 @@
-export default function Settings() {
+import { SettingsWidget } from "@/src/widgets/settings";
+
+export default function SettingsPage() {
   return (
     <>
-      <p>Settings</p>
+      <SettingsWidget />
     </>
   );
 }
