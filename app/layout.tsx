@@ -1,6 +1,5 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import HomePage from "./page";
 import { NavBar } from "@/widgets/navbar";
 
 const roboto = Roboto({
@@ -14,7 +13,9 @@ export default function RootLayout({ children }: any) {
       <body>
         <div className="flex">
           <NavBar />
-          <main className="flex-1">{children}</main>
+          <main className="w-full bg-blue-50 h-screen py-3 px-5">
+            {children}
+          </main>
         </div>
       </body>
     </html>
