@@ -1,6 +1,7 @@
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { NavBar } from "@/widgets/navbar";
+import { NavBar } from "@/src/widgets/navbar";
+import AuthLayout from "@/src/shared/layouts";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -12,6 +13,7 @@ export default function RootLayout({ children }: any) {
     <html lang="en" className={roboto.className}>
       <body>
         <div className="flex">
+          <AuthLayout />
           <NavBar />
           <main className="w-full bg-blue-50 h-screen py-3 px-5">
             {children}
