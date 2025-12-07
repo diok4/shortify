@@ -23,12 +23,12 @@ export const POST = async (req: Request) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const user = prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         username,
         email,
         passwordHash,
-        avatarUrl: `https://api.dicebar.com/7.x/adventurer/svg?seed=${username}`,
+        avatarUrl: `https://api.dicebear.com/7.x/adventurer/svg?seed=${username}`,
       },
     });
     return NextResponse.json({ ok: true });
