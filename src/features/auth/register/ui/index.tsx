@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Input } from "@/src/shared/input";
+import { registerUser } from "../model";
 
 interface IForm {
   username: string;
@@ -8,7 +9,7 @@ interface IForm {
   password: string;
 }
 
-export const RegisterForm = () => {
+export const RegisterForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const [formData, setFormData] = useState<IForm>({
     username: "",
     email: "",
@@ -18,8 +19,23 @@ export const RegisterForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await registerUser(formData);
+      if (!res.error) {
+        onSuccess();
+      }
+
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <form className="gap-3 flex flex-col">
+    <form className="gap-3 flex flex-col" onSubmit={handleSubmit}>
       <Input
         label="username"
         name="username"

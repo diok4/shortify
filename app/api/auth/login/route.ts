@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/src/shared/lib/prisma";
 import bcrypt from "bcryptjs";
-import { signToken } from "@/src/shared/lib/jwt";
+import jwt from "jsonwebtoken";
 
 export const POST = async (req: Request) => {
   try {
@@ -20,22 +20,37 @@ export const POST = async (req: Request) => {
 
     if (!user) {
       return NextResponse.json(
-        { error: "Not a correct email or password" },
+        { error: "Not correct email or password" },
         { status: 401 }
       );
     }
-    const token = signToken({ id: user.id });
+
+    const isValid = await bcrypt.compare(password, user.passwordHash);
+
+    if (!isValid) {
+      return NextResponse.json(
+        { error: "Not correct email or password" },
+        { status: 401 }
+      );
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
+      expiresIn: "7d",
+    });
+
     const res = NextResponse.json({ ok: true });
 
     res.cookies.set("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       path: "/",
+      maxAge: 60 * 60 * 24 * 7,
     });
 
     return res;
   } catch (error) {
+    console.error("LOGIN ERROR:", error);
     return NextResponse.json({ error: "Server failed" }, { status: 500 });
   }
 };
