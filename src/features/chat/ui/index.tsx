@@ -6,7 +6,6 @@ export const ChatWrapper = () => {
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
 
-  // --- MAIN SEND LOGIC ---
   async function handleSend(e?: any) {
     if (e) e.preventDefault();
     if (!text.trim()) return;
@@ -14,7 +13,6 @@ export const ChatWrapper = () => {
     const userMessage = text;
     setText("");
 
-    // Добавляем сообщение пользователя
     setMessages((prev) => [
       ...prev,
       { role: "user", text: userMessage, id: Date.now() },
@@ -23,7 +21,6 @@ export const ChatWrapper = () => {
     setLoading(true);
 
     try {
-      // Отправляем запрос к нашему API
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -63,7 +60,6 @@ export const ChatWrapper = () => {
 
   return (
     <div className="max-w-2xl mx-auto py-6 px-4">
-      {/* MESSAGE LIST */}
       <div className="flex flex-col gap-3">
         {messages.map((msg) => (
           <div
@@ -85,7 +81,6 @@ export const ChatWrapper = () => {
         )}
       </div>
 
-      {/* INPUT FIELD */}
       <form onSubmit={handleSend} className="flex gap-2 mt-4">
         <input
           className="flex-1 border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-blue-500"
