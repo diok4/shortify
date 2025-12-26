@@ -25,7 +25,7 @@ export async function POST(req: Request) {
             {
               role: "system",
               content:
-                "Ты — сервис сокращения текста. Твоя задача: брать длинные тексты и выдавать очень краткие, понятные и простые пересказы. Никаких лишних слов, только суть.",
+                "You are a text summarization service. Your task is to take long texts and produce very short, clear, and simple summaries. No unnecessary words — only the core meaning.",
             },
             {
               role: "user",

@@ -39,7 +39,7 @@ export const ChatWrapper = () => {
           ...prev,
           {
             role: "assistant",
-            text: "AI не смог ответить",
+            text: "AI cannot answer",
             id: Date.now() + 1,
           },
         ]);
@@ -49,7 +49,7 @@ export const ChatWrapper = () => {
         ...prev,
         {
           role: "assistant",
-          text: "Ошибка сервера. Попробуйте позже.",
+          text: "Server error. Try later.",
           id: Date.now() + 1,
         },
       ]);
@@ -81,17 +81,17 @@ export const ChatWrapper = () => {
         )}
       </div>
 
-      <form onSubmit={handleSend} className="flex gap-2 mt-4">
-        <input
-          className="flex-1 border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-blue-500"
+      <form onSubmit={handleSend} className="flex flex-col gap-2 mt-4 h-50">
+        <textarea
+          className="flex-1 border resize-none border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-blue-500 h-40"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Enter your message..."
+          placeholder="Enter your text to shorten..."
         />
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 rounded-lg hover:bg-blue-700 transition"
+          className="py-1 bg-blue-800 text-white px-4 rounded-lg hover:bg-blue-900 transition"
         >
           Send
         </button>
